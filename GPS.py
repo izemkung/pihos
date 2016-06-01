@@ -24,13 +24,13 @@ def ConfigSectionMap(section):
             dict1[option] = None
     return dict1
 
-if os.path.exists("/home/pi/pihos/usbconfig.ini") == False:
+if os.path.exists("/home/pi/usb/config.ini") == False:
     print("config.ini error")
-    os.system('sudo mount /dev/sda1 /home/pi/pihos/usb')
+    os.system('sudo mount /dev/sda1 /home/pi/usb/')
     exit()
     
 Config = ConfigParser.ConfigParser()
-Config.read('/home/pi/pihos/usbconfig.ini')
+Config.read('/home/pi/usb/config.ini')
 
 id =  ConfigSectionMap('Profile')['id']
 timevdo = ConfigSectionMap('Profile')['timevdo']

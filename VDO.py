@@ -21,20 +21,20 @@ def ConfigSectionMap(section):
             dict1[option] = None
     return dict1
 
-if os.path.exists("/home/pi/pihos/usb/config.ini") == False:
+if os.path.exists("/home/pi/usb/config.ini") == False:
     print("config.ini error")
-    os.system('sudo mount /dev/sda1 /home/pi/pihos/usb')
+    os.system('sudo mount /dev/sda1 /home/pi/usb')
     exit()
     
 Config = ConfigParser.ConfigParser()
-Config.read('/home/pi/pihos/usbconfig.ini')
+Config.read('/home/pi/usbconfig.ini')
 
 id =  ConfigSectionMap('Profile')['id']
 timevdo = ConfigSectionMap('Profile')['timevdo']
 timepic = ConfigSectionMap('Profile')['timepic']
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-o", "--output", type=str, default="/home/pi/pihos/usb",
+ap.add_argument("-o", "--output", type=str, default="/home/pi/usb",
 	help="path to output")
 ap.add_argument("-i", "--idcamera", type=int, default=0,
 	help="camera should be used")
@@ -47,12 +47,12 @@ args = vars(ap.parse_args())
 if os.path.exists(args["output"]+"vdo/ch0") == False:
     print("Mkdir!!!")
     #os.system('sudo mount /dev/sda1 /mnt/usbdrive')
-    os.system('sudo mkdir /home/pi/pihos/usbvdo')
-    os.system('sudo mkdir /home/pi/pihos/usbvdo/ch0')
-    os.system('sudo mkdir /home/pi/pihos/usbvdo/ch1')
-    os.system('sudo mkdir /home/pi/pihos/usbpic')
-    os.system('sudo mkdir /home/pi/pihos/usbpic/ch0')
-    os.system('sudo mkdir /home/pi/pihos/usbpic/ch1')
+    os.system('sudo mkdir /home/pi/usbvdo')
+    os.system('sudo mkdir /home/pi/usbvdo/ch0')
+    os.system('sudo mkdir /home/pi/usbvdo/ch1')
+    os.system('sudo mkdir /home/pi/usbpic')
+    os.system('sudo mkdir /home/pi/usbpic/ch0')
+    os.system('sudo mkdir /home/pi/usbpic/ch1')
     exit()
        
 print("Camera "+str(args["idcamera"])) 
