@@ -24,13 +24,13 @@ def ConfigSectionMap(section):
             dict1[option] = None
     return dict1
 
-if os.path.exists("/home/pi/usb/config.ini") == False:
+if os.path.exists("/home/pi/pihos/usbconfig.ini") == False:
     print("config.ini error")
-    os.system('sudo mount /dev/sda1 /home/pi/usb/')
+    os.system('sudo mount /dev/sda1 /home/pi/pihos/usb')
     exit()
     
 Config = ConfigParser.ConfigParser()
-Config.read('/home/pi/usb/config.ini')
+Config.read('/home/pi/pihos/usbconfig.ini')
 
 id =  ConfigSectionMap('Profile')['id']
 timevdo = ConfigSectionMap('Profile')['timevdo']
@@ -49,9 +49,9 @@ GPIO.setup(17, GPIO.OUT) ## Setup GPIO Pin 7 to OUT
 
   
 while True:
-    newpic0 = max(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
+    newpic0 = max(glob.iglob('/home/pi/pihos/usbpic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
 
-    newpic1 = max(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime)
+    newpic1 = max(glob.iglob('/home/pi/pihos/usbpic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime)
 
     try:
         if newpic0 != OldPic0:
