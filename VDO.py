@@ -21,7 +21,7 @@ def ConfigSectionMap(section):
             dict1[option] = None
     return dict1
 
-if os.path.exists("/home/pi/pihos/usbconfig.ini") == False:
+if os.path.exists("/home/pi/pihos/usb/config.ini") == False:
     print("config.ini error")
     os.system('sudo mount /dev/sda1 /home/pi/pihos/usb')
     exit()
