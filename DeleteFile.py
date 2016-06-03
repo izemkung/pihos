@@ -24,23 +24,29 @@ print '/home/pi/usb  Size = {0:.2f} Avail = {1:.2f} Use% = {2:.2f}'.format(size,
 #================================Delet PIC==================================
 #print len([name for name in os.listdir('/home/pi/usb/pic/ch0') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch0', name))])
 #print min(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
-count = 0 
-if len([name for name in os.listdir('/home/pi/usb/pic/ch0') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch0', name))]) > 7200 :
-    print 'NUM Pic ch0 > 7000 '
-    while len([name for name in os.listdir('/home/pi/usb/pic/ch0') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch0', name))]) > 3600: 
+count = len([name for name in os.listdir('/home/pi/usb/pic/ch0') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch0', name))]) 
+numDel = 0 
+print 'NUM Pic ch0 {0} '.format(count)
+if count > 100: 
+    while count > 50: 
        pic0 = min(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
-       count += 1
+       count -= 1
+       numDel += 1
+       print 'Delete' + pic0
        os.remove(pic0)
-    print 'Delete {0} file in /home/pi/usb/pic/ch0/ '.format(count)
+    print 'Delete {0} file in /home/pi/usb/pic/ch0/ '.format(numDel)
        
-count = 0    
-if len([name for name in os.listdir('/home/pi/usb/pic/ch1') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch1', name))]) > 7200:
-    print 'NUM Pic ch1 > 7000 '
-    while len([name for name in os.listdir('/home/pi/usb/pic/ch1') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch1', name))]) > 3600:
+count = len([name for name in os.listdir('/home/pi/usb/pic/ch1') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch1', name))])
+numDel = 0
+print 'NUM Pic ch1 {0} '.format(count)   
+if  count > 100:
+    while count > 50:
        pic1 = min(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime) 
-       count += 1
+       count -= 1
+       numDel += 1
+       print 'Delete' + pic1
        os.remove(pic1)
-    print 'Delete {0} file in /home/pi/usb/pic/ch1/ '.format(count)
+    print 'Delete {0} file in /home/pi/usb/pic/ch1/ '.format(numDel)
     
 if per < 80 :
     time.sleep(300)

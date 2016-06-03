@@ -5,7 +5,7 @@ var isError = 0;
 
 (function loop() {
     if (isError == 0) {
-        PythonShell.run('testVDO.py', {args: ['-i 0']}, function (err, results) 
+        PythonShell.run('VDO.py', {args: ['-i 0']}, function (err, results) 
         {
           if (err)
           { 

@@ -65,8 +65,8 @@ if __name__ == '__main__':
   try:
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(27, GPIO.OUT)
-    GPIO.setup(22, GPIO.OUT)
+    GPIO.setup(27, GPIO.OUT)#3G
+    GPIO.setup(22, GPIO.OUT)#GPS
     
     gpsp.start() # start it up
     countSend = 0
@@ -84,29 +84,28 @@ if __name__ == '__main__':
       print 'time utc    ' , gpsd.utc,' + ', gpsd.fix.time
       print 'http://safetyam.tely360.com/api/tracking.php?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed)
       
-      if str(gpsd.fix.latitude) != 'nan' :
+      if str(gpsd.fix.latitude) != 'nan' and str(gpsd.fix.latitude) != '0.0':
         GPIO.output(22,True)
 		#userdata = {"busID": "1", "latitude": "Doe", "password": "jdoe123"}
 		#resp = requests.post('http://srinuanchan.com/api/bustracking/tracking.php?', params=userdata)
-      try:
-        #resp = requests.get('http://safetyam.tely360.com/api/tracking.php?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(3,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
-        resp = requests.get('http://safetyam.tely360.com/api/tracking.php?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
-        #resp = requests.get('http://srinuanchan.com/api/bustracking/tracking.php?busID={0}&latitude={1:.6f}&longitude={2:.6f}&speed={3:.2f}'.format(2,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
+        try:
+          #resp = requests.get('http://safetyam.tely360.com/api/tracking.php?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(3,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
+          resp = requests.get('http://safetyam.tely360.com/api/tracking.php?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
+          #resp = requests.get('http://srinuanchan.com/api/bustracking/tracking.php?busID={0}&latitude={1:.6f}&longitude={2:.6f}&speed={3:.2f}'.format(2,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
 
-        #print 'status_code ' , resp.status_code
-        #print 'headers     ' , resp.headers
-        print 'content     ' , resp.content
-        countSend = countSend + 1
-        countError = 0
-        GPIO.output(27,True)
-      except:
-        print 'ConnectionError'
-        time.sleep(1)
-        countError = countError + 1
-        if countError > 20:
-          GPIO.output(27,False)
-          break
-        continue
+          #print 'status_code ' , resp.status_code
+          #print 'headers     ' , resp.headers
+          print 'content     ' , resp.content
+          countError = 0
+          GPIO.output(27,True)
+        except:
+          print 'ConnectionError'
+          time.sleep(1)
+          countError += 1
+          if countError > 20:
+            GPIO.output(27,False)
+            break
+          continue
 		
       GPIO.output(22,False)
       time.sleep(0.95) #set to whatever
@@ -140,3 +139,6 @@ if __name__ == '__main__':
     gpsp.join() # wait for the thread to finish what it's doing
     GPIO.cleanup()
   print "Done.\nExiting."
+  gpsp.running = False
+  gpsp.join() # wait for the thread to finish what it's doing
+  GPIO.cleanup()
