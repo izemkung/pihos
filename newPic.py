@@ -28,7 +28,10 @@ if os.path.exists("/home/pi/usb/config.ini") == False:
     print("config.ini error")
     os.system('sudo mount /dev/sda1 /home/pi/usb/')
     exit()
-    
+ 
+os.system('sudo rm /home/pi/usb/pic/ch0/*.jpg')  
+os.system('sudo rm /home/pi/usb/pic/ch1/*.jpg')
+time.sleep(5)
 Config = ConfigParser.ConfigParser()
 Config.read('/home/pi/usb/config.ini')
 
