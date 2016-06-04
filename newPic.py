@@ -38,11 +38,11 @@ Config.read('/home/pi/usb/config.ini')
 id =  ConfigSectionMap('Profile')['id']
 timevdo = ConfigSectionMap('Profile')['timevdo']
 timepic = ConfigSectionMap('Profile')['timepic']
+gps_url = ConfigSectionMap('Profile')['gps_api']
+pic_url = ConfigSectionMap('Profile')['pic_api']
 
 OldPic0 = ''
 OldPic1 = ''
-#url = 'http://srinuanchan.com/api/bustracking/upload.php'
-url = 'http://safetyam.tely360.com/api/upload.php'
 countError = 0
 countNoNewpic = 0
 connectionError = 0
@@ -82,7 +82,7 @@ while True:
             
         data = {'ambulance_id':id,'images_name_1':encoded_string1,'images_name_2':encoded_string}
         try:
-            r = requests.post(url, data=data)
+            r = requests.post(pic_url, data=data)
             print r
             GPIO.output(27,True)
             connectionError = 0

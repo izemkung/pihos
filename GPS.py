@@ -35,8 +35,9 @@ Config.read('/home/pi/usb/config.ini')
 id =  ConfigSectionMap('Profile')['id']
 timevdo = ConfigSectionMap('Profile')['timevdo']
 timepic = ConfigSectionMap('Profile')['timepic']
+gps_url = ConfigSectionMap('Profile')['gps_api']
+pic_url = ConfigSectionMap('Profile')['pic_api']
 
- 
 gpsd = None #seting the global variable
 
  
@@ -82,17 +83,13 @@ if __name__ == '__main__':
       print 'latitude    ' , gpsd.fix.latitude
       print 'longitude   ' , gpsd.fix.longitude
       print 'time utc    ' , gpsd.utc,' + ', gpsd.fix.time
-      print 'http://safetyam.tely360.com/api/tracking.php?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed)
+      print  gps_url,'?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed)
       
       if str(gpsd.fix.latitude) != 'nan' and str(gpsd.fix.latitude) != '0.0':
         GPIO.output(22,True)
-		#userdata = {"busID": "1", "latitude": "Doe", "password": "jdoe123"}
-		#resp = requests.post('http://srinuanchan.com/api/bustracking/tracking.php?', params=userdata)
-        try:
-          #resp = requests.get('http://safetyam.tely360.com/api/tracking.php?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(3,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
-          resp = requests.get('http://safetyam.tely360.com/api/tracking.php?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
-          #resp = requests.get('http://srinuanchan.com/api/bustracking/tracking.php?busID={0}&latitude={1:.6f}&longitude={2:.6f}&speed={3:.2f}'.format(2,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
-
+		    try:
+          resp = requests.get(gps_url+'?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
+          
           #print 'status_code ' , resp.status_code
           #print 'headers     ' , resp.headers
           print 'content     ' , resp.content
@@ -127,8 +124,6 @@ if __name__ == '__main__':
       
 	  
 	  #r = urllib.request.urlopen('https://api.github.com', auth=('user', 'pass'))
-	  #r = requests.get('http://srinuanchan.com/api/bustracking/tracking.php?busID={0}&latitude={1:.6}&longitude={2:.6}&speed={3}'.format(3,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed))
-	  #r = requests.get('http://srinuanchan.com/api/bustracking/tracking.php?', busID=('1'),latitude=(gpsd.fix.latitude),longitude=(gpsd.fix.longitude),speed=(gpsd.fix.speed))
 	  #var r = requests.get('http://www.google.com')
 	  
       
