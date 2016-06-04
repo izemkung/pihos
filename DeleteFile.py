@@ -65,6 +65,7 @@ while True:
             print "Download FW "
             os.system('git clone https://github.com/izemkung/pihos /home/pi/tmp && rm -rf /home/pi/pihos && mv /home/pi/tmp/ /home/pi/pihos && rm -rf /home/pi/tmp')
             print "FW Ready to use!!!"
+            os.system('sudo reboot')
             break
         time.sleep(240)
         continue
