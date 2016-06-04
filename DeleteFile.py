@@ -52,10 +52,10 @@ while True:
         print 'Delete {0} file in /home/pi/usb/pic/ch1/ '.format(numDel)
         
     if per < 80 :
-        time.sleep(300)
         print 'Memmory is < 80% Ok!!'
+        time.sleep(60)
         vercurrent = subprocess.check_output('git rev-parse --verify HEAD', shell=True)
-        print 'Cur ver' + vercurrent
+        print 'Cur ver ' + vercurrent
 
         vergit =  subprocess.check_output('git ls-remote https://github.com/izemkung/pihos | head -1 | cut -f 1', shell=True)
         print 'Git ver '+ vergit
@@ -65,6 +65,8 @@ while True:
             print "Download FW "
             os.system('git clone https://github.com/izemkung/pihos /home/pi/tmp && rm -rf /home/pi/pihos && mv /home/pi/tmp/ /home/pi/pihos && rm -rf /home/pi/tmp')
             print "FW Ready to use!!!"
+            break
+        time.sleep(240)
         continue
         
     while per > 70 :
