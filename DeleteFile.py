@@ -9,6 +9,7 @@ import urllib2
 import httplib
 import time
 import sys
+import subprocess
 
 
 if os.path.exists("/home/pi/usb/vdo/ch0") == False:
@@ -53,6 +54,17 @@ while True:
     if per < 80 :
         time.sleep(300)
         print 'Memmory is < 80% Ok!!'
+        vercurrent = subprocess.check_output('git rev-parse --verify HEAD', shell=True)
+        print 'Cur ver' + vercurrent
+
+        vergit =  subprocess.check_output('git ls-remote https://github.com/izemkung/pihos | head -1 | cut -f 1', shell=True)
+        print 'Git ver '+ vergit
+        if vergit == vercurrent :
+            print "version FW Ok!!!"   
+        if vergit != vercurrent :
+            print "Download FW "
+            os.system('git clone https://github.com/izemkung/pihos /home/pi/tmp && rm -rf /home/pi/pihos && mv /home/pi/tmp/ /home/pi/pihos && rm -rf /home/pi/tmp')
+            print "FW Ready to use!!!"
         continue
         
     while per > 70 :
