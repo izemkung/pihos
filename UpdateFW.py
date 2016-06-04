@@ -4,7 +4,7 @@ import subprocess
 vercurrent = subprocess.check_output('git rev-parse --verify HEAD', shell=True)
 print vercurrent
 
-vergit =  os.system('git ls-remote https://github.com/izemkung/pihos | head -1 | cut -f 1')
+vergit =  subprocess.check_output('git ls-remote https://github.com/izemkung/pihos | head -1 | cut -f 1', shell=True)
 print vergit
 
 if vergit == vercurrent :
