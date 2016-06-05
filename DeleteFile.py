@@ -70,7 +70,7 @@ if per < 80 :
         print "FW Ready to use!!!"
         os.system('sudo reboot')
         #break
-    #time.sleep(240)
+    time.sleep(300)
     #continue
     
 while per > 70 :
