@@ -53,7 +53,7 @@ if  count > 100:
     
 if per < 80 :
     print 'Memmory is < 80% Ok!!'
-    time.sleep(60)
+    #time.sleep(60)
     vercurrent = subprocess.check_output('git rev-parse --verify HEAD', shell=True)
     print 'Cur ver ' + vercurrent
 
@@ -65,10 +65,10 @@ if per < 80 :
         print "Download FW "
         os.system('git clone https://github.com/izemkung/pihos /home/pi/tmp && rm -rf /home/pi/pihos && mv /home/pi/tmp/ /home/pi/pihos && rm -rf /home/pi/tmp')
         print "FW Ready to use!!!"
-        os.system('sudo reboot')
-        break
-    time.sleep(240)
-    continue
+        #os.system('sudo reboot')
+        #break
+    #time.sleep(240)
+    #continue
     
 while per > 70 :
     OldVideo0 = min(glob.iglob('/home/pi/usb/vdo/ch0/*.[Aa][Vv][Ii]'), key=os.path.getctime)
