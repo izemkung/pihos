@@ -40,7 +40,7 @@ ap.add_argument("-i", "--idcamera", type=int, default=0,
 	help="camera should be used")
 ap.add_argument("-t", "--timevdo", type=int, default=timevdo,
 	help="time of output video(min)")
-ap.add_argument("-c", "--timepic", type=float, default=timepic,# 0.95
+ap.add_argument("-c", "--timepic", type=float, default=0.5,# 0.95
 	help="save pic evev sec(sec)")
 args = vars(ap.parse_args())
 
@@ -69,7 +69,7 @@ cap.set(4,768/2)
 cap.set(5,20)
 #cap.set(3,1024)
 #cap.set(4,768)
-
+picResolotion = 2
 #time.sleep(2)
 
 #cap.set(15, -8.0)
@@ -80,10 +80,10 @@ fourcc = cv2.cv.CV_FOURCC('D','I','V','X')
 
 ret, frame = cap.read()
 (h, w) = frame.shape[:2]
-print("Vdo:"+str(w)+"x"+str(h) + " Pic:"+str(w/4)+"x"+str(h/4) )
+print("Vdo:"+str(w)+"x"+str(h) + " Pic:"+str(w/picResolotion)+"x"+str(h/picResolotion) )
 
 vdoname =  gmtime()
-out = cv2.VideoWriter(args["output"]+ 'vdo/ch' +str(args["idcamera"]) +'/vdo_{}.avi'.format(strftime("%d%m%Y%H%M%S", vdoname)),fourcc, 20.0, (w,h))
+#out = cv2.VideoWriter(args["output"]+ 'vdo/ch' +str(args["idcamera"]) +'/vdo_{}.avi'.format(strftime("%d%m%Y%H%M%S", vdoname)),fourcc, 20.0, (w,h))
 print(args["output"]+ 'vdo/ch' +str(args["idcamera"]) +'/vdo_{}.avi'.format(strftime("%d%m%Y%H%M%S", vdoname))) 
 
 #Picture 
@@ -100,13 +100,13 @@ while(cap.isOpened()):
     ret, frame = cap.read()
     if ret==True:
         if current_time - endtime > timeSavePic:
-            framePic = imutils.resize(frame, w/4)    
+            framePic = imutils.resize(frame, w/picResolotion)    
             cv2.imwrite(args["output"]+  'pic/ch' +str(args["idcamera"])  +'/img_{}.jpg'.format(strftime("%d%m%Y%H%M%S", gmtime())), framePic)
             endtime = current_time
             countPic+=1
             
-        out.write(frame)
-        #cv2.imshow('frame',frame)
+        #out.write(frame)
+        
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
         if current_time - startTime > 60*timeVDO:
@@ -117,6 +117,6 @@ while(cap.isOpened()):
 # Release everything if job is finished
 print("Time > "+str(timeVDO) + " m NumPic > "+str(countPic)) 
 print("Process time > "+str(current_time - startTime)+" sec")
-out.release()
+#out.release()
 cap.release()
 print("Ok!!!") 

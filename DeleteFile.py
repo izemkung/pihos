@@ -37,7 +37,7 @@ if count > 100:
         numDel += 1
         #print 'Delete' + pic0
         os.remove(pic0)
-    print 'Delete {0} file in /home/pi/usb/pic/ch0/ '.format(numDel)
+    print 'Delete {0} file in pic/ch0/ '.format(numDel)
     
 count = len([name for name in os.listdir('/home/pi/usb/pic/ch1') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch1', name))])
 numDel = 0
@@ -49,7 +49,7 @@ if  count > 100:
         numDel += 1
         #print 'Delete' + pic1
         os.remove(pic1)
-    print 'Delete {0} file in /home/pi/usb/pic/ch1/ '.format(numDel)
+    print 'Delete {0} file in pic/ch1/ '.format(numDel)
     
 if per < 80 :
     print 'Memmory is < 80% Ok!!'
@@ -77,12 +77,12 @@ while per > 70 :
     OldVideo0 = min(glob.iglob('/home/pi/usb/vdo/ch0/*.[Aa][Vv][Ii]'), key=os.path.getctime)
     OldVideo1 = min(glob.iglob('/home/pi/usb/vdo/ch1/*.[Aa][vv][Ii]'), key=os.path.getctime)
 
-    count = 0
-    for file in os.listdir("/home/pi/usb/pic/ch0/"):
-        if file.endswith(".jpg"):
-            if os.path.getctime("/home/pi/usb/pic/ch0/" + file) < os.path.getctime(OldVideo0) :
-                os.remove("/home/pi/usb/pic/ch0/" + file)
-                count = count +1
+    #count = 0
+    #for file in os.listdir("/home/pi/usb/pic/ch0/"):
+        #if file.endswith(".jpg"):
+            #if os.path.getctime("/home/pi/usb/pic/ch0/" + file) < os.path.getctime(OldVideo0) :
+                #os.remove("/home/pi/usb/pic/ch0/" + file)
+                #count = count +1
 
     os.remove(OldVideo0)
     print 'Delete '+ OldVideo0 

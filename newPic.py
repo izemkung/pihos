@@ -65,10 +65,10 @@ while True:
         
         if OldPic1 != '':
             os.remove(OldPic1)
-            print 'Delete '+OldPic1
+            print 'Delete '+ OldPic1
         if OldPic0 != '':
             os.remove(OldPic0)
-            print 'Delete '+OldPic0
+            print 'Delete '+ OldPic0
         OldPic0 = newpic0    
         OldPic1 = newpic1
         
@@ -85,6 +85,7 @@ while True:
             r = requests.post(pic_url, data=data)
             print r
             GPIO.output(27,True)
+            GPIO.output(17,False)
             connectionError = 0
             
         except:
@@ -103,7 +104,7 @@ while True:
         break
       
             
-    time.sleep(0.5)
+    time.sleep(0.2)
 
 GPIO.output(17,False)   
 GPIO.cleanup()
