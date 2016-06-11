@@ -54,6 +54,7 @@ if  count > 100:
 if per < 80 :
     print 'Memmory is < 80% Ok!!'
     time.sleep(60)
+    #===================================================Update FW Version================================
     vercurrent = subprocess.check_output('git rev-parse --verify HEAD', shell=True)
     print 'Cur ver ' + vercurrent
 
