@@ -38,9 +38,9 @@ ap.add_argument("-o", "--output", type=str, default="/home/pi/usb/",
 	help="path to output")
 ap.add_argument("-i", "--idcamera", type=int, default=0,
 	help="camera should be used")
-ap.add_argument("-t", "--timevdo", type=int, default=timevdo,
+ap.add_argument("-t", "--timevdo", type=int, default=1,
 	help="time of output video(min)")
-ap.add_argument("-c", "--timepic", type=float, default=0.5,# 0.95
+ap.add_argument("-c", "--timepic", type=float, default=0.9,# 0.95
 	help="save pic evev sec(sec)")
 args = vars(ap.parse_args())
 

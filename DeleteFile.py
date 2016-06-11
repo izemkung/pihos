@@ -63,9 +63,15 @@ if per < 80 :
         print "version FW Ok!!!"   
     if vergit != vercurrent :
         print "Download FW "
+        if os.path.exists("/home/pi/tmp") == True:
+            print subprocess.check_output('rm -rf /home/pi/tmp', shell=True) 
+            time.sleep(10)   
         print subprocess.check_output('git clone https://github.com/izemkung/pihos /home/pi/tmp', shell=True)
-        print subprocess.check_output('rm -rf /home/pi/pihos', shell=True)
-        print subprocess.check_output('mv /home/pi/tmp /home/pi/pihos', shell=True)
+        time.sleep(10)
+        if os.path.exists("/home/pi/tmp") == True:
+            print subprocess.check_output('rm -rf /home/pi/pihos', shell=True)
+            time.sleep(10)
+            print subprocess.check_output('mv /home/pi/tmp /home/pi/pihos', shell=True)
         #print subprocess.check_output('rm -rf /home/pi/tmp', shell=True)
         print "FW Ready to use!!!"
         os.system('sudo reboot')
