@@ -102,7 +102,7 @@ while(cap.isOpened()):
     if ret==True:
         if current_time - endtime > timeSavePic:
             framePic = imutils.resize(frame, w/picResolotion)
-            cv2.putText(img,'V1',(10,500), font, 1,(255,255,255),2)    
+            cv2.putText(framePic,'V1',(10,10), font, 1,(255,255,255),2)    
             cv2.imwrite(args["output"]+  'pic/ch' +str(args["idcamera"])  +'/img_{}.jpg'.format(strftime("%d%m%Y%H%M%S", gmtime())), framePic)
             endtime = current_time
             countPic+=1
