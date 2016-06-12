@@ -107,6 +107,7 @@ while(cap.isOpened()):
             endtime = current_time
             countPic+=1
             
+        
         #out.write(frame)
         
         if cv2.waitKey(1) & 0xFF == ord('q'):
