@@ -63,17 +63,19 @@ while True:
         GPIO.output(17,True)
         countNoNewpic = 0
         
-        if OldPic1 != '':
-            os.remove(OldPic1)
-            print 'Delete '+ OldPic1
-        if OldPic0 != '':
-            os.remove(OldPic0)
-            print 'Delete '+ OldPic0
-        OldPic0 = newpic0    
-        OldPic1 = newpic1
-        
-        print 'Send ' +newpic0
-        print 'Send ' +newpic1
+        try:
+            if OldPic1 != '':
+                os.remove(OldPic1)
+                #print 'Delete '+ OldPic1
+            if OldPic0 != '':
+                os.remove(OldPic0)
+                #print 'Delete '+ OldPic0
+            OldPic0 = newpic0    
+            OldPic1 = newpic1
+        except:
+            print 'Error no such file'
+        #print 'Send ' +newpic0
+        #print 'Send ' +newpic1
         
         with open(newpic1, "rb") as image_file1:
             encoded_string1 = base64.b64encode(image_file1.read())
@@ -86,8 +88,9 @@ while True:
             print r
             GPIO.output(27,True)
             GPIO.output(17,False)
-            connectionError = 0
             
+            print 'Send '
+            connectionError = 0
         except:
             GPIO.output(27,False)
             connectionError += 1
@@ -100,7 +103,7 @@ while True:
          
     if countNoNewpic > 20 :
         GPIO.output(17,False)
-        print "Timeout no pic upadte"
+        print "Timeout no new pic upadte"
         break
       
             

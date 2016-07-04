@@ -8,7 +8,7 @@ def SendAlartFun(channel):
         resp = requests.get('http://safetyam.tely360.com/api/notification.php?ambulance_id={0}'.format(id), timeout=2.001)
         print ('content     ' + resp.content) 
     except:
-        print 'SendAlartFun Connevtion lost'
+        print 'SendAlartFun Connection lost'
         
 def ConfigSectionMap(section):
     dict1 = {}
