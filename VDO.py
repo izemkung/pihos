@@ -102,10 +102,14 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM) ## Use board pin numbering
 GPIO.setup(4, GPIO.IN) # Power
+GPIO.setup(17,GPIO.OUT)
 
 while(GPIO.input(4) == 0):
     print("Ok!!!")
-    time.sleep(10)
+    time.sleep(0.2)
+    GPIO.output(17,True)
+    time.sleep(0.2)
+    GPIO.output(17,False)
 
 while(cap.isOpened()):
     current_time = time.time()
