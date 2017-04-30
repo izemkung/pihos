@@ -99,6 +99,10 @@ startTime = time.time()
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM) ## Use board pin numbering
+GPIO.setup(4, GPIO.IN) # Power
+
 while(GPIO.input(4) == 0):
     print("Ok!!!")
     time.sleep(10)
@@ -135,3 +139,4 @@ print("Process time > "+str(current_time - startTime)+" sec")
 out.release()
 cap.release()
 print("Ok!!!") 
+GPIO.cleanup()
