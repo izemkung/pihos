@@ -44,16 +44,19 @@ ap.add_argument("-c", "--timepic", type=float, default=0.9,# 0.95
 	help="save pic evev sec(sec)")
 args = vars(ap.parse_args())
 
-if os.path.exists(args["output"]+"vdo/ch0") == False:
-    print("Mkdir!!!")
-    #os.system('sudo mount /dev/sda1 /mnt/usbdrive')
+if os.path.exists(args["output"]+"vdo") == False:
     os.system('sudo mkdir /home/pi/usb/vdo')
+if os.path.exists(args["output"]+"vdo/ch0") == False:
     os.system('sudo mkdir /home/pi/usb/vdo/ch0')
+if os.path.exists(args["output"]+"vdo/ch1") == False:
     os.system('sudo mkdir /home/pi/usb/vdo/ch1')
+if os.path.exists(args["output"]+"pic") == False:
     os.system('sudo mkdir /home/pi/usb/pic')
-    os.system('sudo mkdir /home/pi/usb/pic/ch0')
-    os.system('sudo mkdir /home/pi/usb/pic/ch1')
-    exit()
+if os.path.exists(args["output"]+"pic/ch0") == False:
+    os.system('sudo mkdir /home/pi/usb/piv/ch0')
+if os.path.exists(args["output"]+"pic/ch1") == False:
+    os.system('sudo mkdir /home/pi/usb/piv/ch1')
+
        
 print("Camera "+str(args["idcamera"])) 
 
