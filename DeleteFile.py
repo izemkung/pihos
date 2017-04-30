@@ -112,5 +112,5 @@ while per > 70 :
     per = (( size - avail ) / size ) * 100
     print '/home/pi/usb  Size = {0:.2f} Avail = {1:.2f} Use% = {2:.2f}'.format(size,avail,per)
     
-print 'Memmory is < 70 OK!!!'
+print 'Memmory is OK!!!'
 #print 'Memmory is Error'

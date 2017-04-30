@@ -1,4 +1,5 @@
 from time import gmtime, strftime
+import RPi.GPIO as GPIO ## Import GPIO library
 import time
 import datetime
 import imutils
@@ -98,6 +99,10 @@ startTime = time.time()
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
+while(GPIO.input(4) == 0):
+    print("Ok!!!")
+    time.sleep(10)
+
 while(cap.isOpened()):
     current_time = time.time()
  
@@ -119,6 +124,8 @@ while(cap.isOpened()):
             break
         if current_time - startTime > 60*timeVDO:
             break 
+        if(GPIO.input(4) == 0):
+            break
     else:
         break
 

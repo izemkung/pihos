@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO ## Import GPIO library
 import ConfigParser
 import os
+import time
 import requests
 
 def SendAlartFun(channel):
@@ -64,6 +65,7 @@ GPIO.add_event_detect(3, GPIO.RISING, callback=SendAlartFun, bouncetime=100)
 while True:
     if(GPIO.input(4) == 0):
         print('Power Off')
+        time.sleep(10)
         os.system('sudo shutdown -h now')
         break
 GPIO.cleanup()
