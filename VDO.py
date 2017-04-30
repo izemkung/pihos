@@ -38,7 +38,7 @@ ap.add_argument("-o", "--output", type=str, default="/home/pi/usb/",
 	help="path to output")
 ap.add_argument("-i", "--idcamera", type=int, default=0,
 	help="camera should be used")
-ap.add_argument("-t", "--timevdo", type=int, default=1,
+ap.add_argument("-t", "--timevdo", type=int, default=10,
 	help="time of output video(min)")
 ap.add_argument("-c", "--timepic", type=float, default=0.9,# 0.95
 	help="save pic evev sec(sec)")
@@ -83,7 +83,7 @@ ret, frame = cap.read()
 print("Vdo:"+str(w)+"x"+str(h) + " Pic:"+str(w/picResolotion)+"x"+str(h/picResolotion) )
 
 vdoname =  gmtime()
-#out = cv2.VideoWriter(args["output"]+ 'vdo/ch' +str(args["idcamera"]) +'/vdo_{}.avi'.format(strftime("%d%m%Y%H%M%S", vdoname)),fourcc, 20.0, (w,h))
+out = cv2.VideoWriter(args["output"]+ 'vdo/ch' +str(args["idcamera"]) +'/vdo_{}.avi'.format(strftime("%d%m%Y%H%M%S", vdoname)),fourcc, 20.0, (w,h))
 print(args["output"]+ 'vdo/ch' +str(args["idcamera"]) +'/vdo_{}.avi'.format(strftime("%d%m%Y%H%M%S", vdoname))) 
 
 #Picture 
@@ -110,7 +110,7 @@ while(cap.isOpened()):
             countPic+=1
             
         
-        #out.write(frame)
+        out.write(frame)
         
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -122,6 +122,6 @@ while(cap.isOpened()):
 # Release everything if job is finished
 print("Time > "+str(timeVDO) + " m NumPic > "+str(countPic)) 
 print("Process time > "+str(current_time - startTime)+" sec")
-#out.release()
+out.release()
 cap.release()
 print("Ok!!!") 

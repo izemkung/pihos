@@ -5,7 +5,7 @@ import requests
 
 def SendAlartFun(channel):
     try:
-        resp = requests.get('http://safetyam.tely360.com/api/notification.php?ambulance_id={0}'.format(id), timeout=2.001)
+        resp = requests.get(nti_url+'?ambulance_id={0}'.format(id), timeout=2.001)
         print ('content     ' + resp.content) 
     except:
         print 'SendAlartFun Connection lost'
@@ -27,13 +27,32 @@ if os.path.exists("/home/pi/usb/config.ini") == False:
     print("config.ini error")
     os.system('sudo mount /dev/sda1 /home/pi/usb/')
     exit()
+
+
+if os.path.exists("/home/pi/usb/pic") == True:
+    print("Delete Pic Foder!!!")
+    #os.system('sudo mount /dev/sda1 /mnt/usbdrive')
+    os.system('sudo rm -rf /home/pi/usb/pic')
+    os.system('sudo mkdir /home/pi/usb/pic')
+    os.system('sudo mkdir /home/pi/usb/pic/ch0')
+    os.system('sudo mkdir /home/pi/usb/pic/ch1')
+
+if os.path.exists("/home/pi/usb/vdo") == True:
+    print("Delete Vdo Foder!!!")
+    #os.system('sudo mount /dev/sda1 /mnt/usbdrive')
+    os.system('sudo rm -rf /home/pi/usb/vdo')
+    os.system('sudo mkdir /home/pi/usb/vdo')
+    os.system('sudo mkdir /home/pi/usb/vdo/ch0')
+    os.system('sudo mkdir /home/pi/usb/vdo/ch1')
     
+       
 Config = ConfigParser.ConfigParser()
 Config.read('/home/pi/usb/config.ini')
 
 id =  ConfigSectionMap('Profile')['id']
 timevdo = ConfigSectionMap('Profile')['timevdo']
 timepic = ConfigSectionMap('Profile')['timepic']
+nti_url = ConfigSectionMap('Profile')['nti_api']
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM) ## Use board pin numbering

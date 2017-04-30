@@ -28,7 +28,9 @@ if os.path.exists("/home/pi/usb/config.ini") == False:
     print("config.ini error")
     os.system('sudo mount /dev/sda1 /home/pi/usb/')
     exit()
- 
+
+
+
 os.system('sudo rm /home/pi/usb/pic/ch0/*.jpg')  
 os.system('sudo rm /home/pi/usb/pic/ch1/*.jpg')
 time.sleep(5)
@@ -44,6 +46,7 @@ pic_url = ConfigSectionMap('Profile')['pic_api']
 OldPic0 = ''
 OldPic1 = ''
 countError = 0
+countPic = 0
 countNoNewpic = 0
 connectionError = 0
 
@@ -54,6 +57,7 @@ GPIO.setup(27, GPIO.OUT)#3G
   
 while True:
     
+    timeout = time.time() + 5
 
     newpic1 = max(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime)
     
@@ -77,6 +81,7 @@ while True:
         #print 'Send ' +newpic0
         #print 'Send ' +newpic1
         
+        
         with open(newpic1, "rb") as image_file1:
             encoded_string1 = base64.b64encode(image_file1.read())
         with open(newpic0, "rb") as image_file:
@@ -85,11 +90,12 @@ while True:
         data = {'ambulance_id':id,'images_name_1':encoded_string1,'images_name_2':encoded_string}
         try:
             r = requests.post(pic_url, data=data)
-            print r
+            #print r
+            #print 'Send '
             GPIO.output(27,True)
             GPIO.output(17,False)
+            countPic += 1
             
-            print 'Send '
             connectionError = 0
         except:
             GPIO.output(27,False)
@@ -103,11 +109,14 @@ while True:
          
     if countNoNewpic > 20 :
         GPIO.output(17,False)
-        print "Timeout no new pic upadte"
+        print "No new pic upadte"
         break
       
             
     time.sleep(0.2)
+    if time.time() > timeout:
+        print "Timeout"
+        break
 
 GPIO.output(17,False)   
 GPIO.cleanup()
