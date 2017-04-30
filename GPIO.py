@@ -30,21 +30,21 @@ if os.path.exists("/home/pi/usb/config.ini") == False:
     exit()
 
 
-if os.path.exists("/home/pi/usb/pic") == True:
-    print("Delete Pic Foder!!!")
+#if os.path.exists("/home/pi/usb/pic") == True:
+#    print("Delete Pic Foder!!!")
     #os.system('sudo mount /dev/sda1 /mnt/usbdrive')
-    os.system('sudo rm -rf /home/pi/usb/pic')
-    os.system('sudo mkdir /home/pi/usb/pic')
-    os.system('sudo mkdir /home/pi/usb/pic/ch0')
-    os.system('sudo mkdir /home/pi/usb/pic/ch1')
+#    os.system('sudo rm -rf /home/pi/usb/pic')
+#    os.system('sudo mkdir /home/pi/usb/pic')
+ #   os.system('sudo mkdir /home/pi/usb/pic/ch0')
+#    os.system('sudo mkdir /home/pi/usb/pic/ch1')
 
-if os.path.exists("/home/pi/usb/vdo") == True:
-    print("Delete Vdo Foder!!!")
+#if os.path.exists("/home/pi/usb/vdo") == True:
+ #   print("Delete Vdo Foder!!!")
     #os.system('sudo mount /dev/sda1 /mnt/usbdrive')
-    os.system('sudo rm -rf /home/pi/usb/vdo')
-    os.system('sudo mkdir /home/pi/usb/vdo')
-    os.system('sudo mkdir /home/pi/usb/vdo/ch0')
-    os.system('sudo mkdir /home/pi/usb/vdo/ch1')
+ #  os.system('sudo rm -rf /home/pi/usb/vdo')
+  #  os.system('sudo mkdir /home/pi/usb/vdo')
+ #   os.system('sudo mkdir /home/pi/usb/vdo/ch0')
+  #  os.system('sudo mkdir /home/pi/usb/vdo/ch1')
     
        
 Config = ConfigParser.ConfigParser()
