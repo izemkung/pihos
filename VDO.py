@@ -54,9 +54,9 @@ if os.path.exists(args["output"]+"vdo/ch1") == False:
 if os.path.exists(args["output"]+"pic") == False:
     os.system('sudo mkdir /home/pi/usb/pic')
 if os.path.exists(args["output"]+"pic/ch0") == False:
-    os.system('sudo mkdir /home/pi/usb/piv/ch0')
+    os.system('sudo mkdir /home/pi/usb/pic/ch0')
 if os.path.exists(args["output"]+"pic/ch1") == False:
-    os.system('sudo mkdir /home/pi/usb/piv/ch1')
+    os.system('sudo mkdir /home/pi/usb/pic/ch1')
 
        
 print("Camera "+str(args["idcamera"])) 
