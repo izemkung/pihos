@@ -118,7 +118,7 @@ while(cap.isOpened()):
     if ret==True:
         if current_time - endtime > timeSavePic:
             framePic = imutils.resize(frame, w/picResolotion)
-            cv2.putText(framePic,"car "+ str(id) + " id "+str(args["idcamera"]),(2,(h/picResolotion) - 5), font, 0.3,(0,255,255),1)    
+            cv2.putText(framePic,"car "+ str(id) + " id "+str(args["idcamera"])+" {}".format(strftime("%d%m%Y%H%M%S", gmtime()) ,(2,(h/picResolotion) - 5), font, 0.3,(0,255,255),1)    
             
             
             cv2.imwrite(args["output"]+  'pic/ch' +str(args["idcamera"])  +'/img_{}.jpg'.format(strftime("%d%m%Y%H%M%S", gmtime())), framePic)

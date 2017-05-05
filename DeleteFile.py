@@ -11,6 +11,31 @@ import time
 import sys
 import subprocess
 
+#===================================================Update FW Version================================
+vercurrent = subprocess.check_output('git rev-parse --verify HEAD', shell=True)
+print 'Cur ver ' + vercurrent
+
+vergit =  subprocess.check_output('git ls-remote https://github.com/izemkung/pihos | head -1 | cut -f 1', shell=True)
+print 'Git ver '+ vergit
+if vergit == vercurrent :
+    print "version FW Ok!!!"   
+if vergit != vercurrent :
+    print "Download FW "
+    if os.path.exists("/home/pi/tmp") == True:
+        print subprocess.check_output('rm -rf /home/pi/tmp', shell=True) 
+        time.sleep(10)   
+    print subprocess.check_output('git clone https://github.com/izemkung/pihos /home/pi/tmp', shell=True)
+    time.sleep(10)
+    if os.path.exists("/home/pi/tmp") == True:
+        print subprocess.check_output('rm -rf /home/pi/pihos', shell=True)
+        time.sleep(10)
+        print subprocess.check_output('mv /home/pi/tmp /home/pi/pihos', shell=True)
+    #print subprocess.check_output('rm -rf /home/pi/tmp', shell=True)
+    print "FW Ready to use!!!"
+    exit()
+    #os.system('sudo reboot')
+    #break
+#continue
 
 if os.path.exists("/home/pi/usb/vdo/ch0") == False:
     os.system('sudo mount /dev/sda1 /home/pi/usb')
@@ -52,33 +77,9 @@ if  count > 100:
     print 'Delete {0} file in pic/ch1/ '.format(numDel)
     
 if per < 80 :
-    print 'Memmory is < 80% Ok!!'
+    print 'Memmory < 80% Ok!!'
     time.sleep(60)
-    #===================================================Update FW Version================================
-    vercurrent = subprocess.check_output('git rev-parse --verify HEAD', shell=True)
-    print 'Cur ver ' + vercurrent
-
-    vergit =  subprocess.check_output('git ls-remote https://github.com/izemkung/pihos | head -1 | cut -f 1', shell=True)
-    print 'Git ver '+ vergit
-    if vergit == vercurrent :
-        print "version FW Ok!!!"   
-    if vergit != vercurrent :
-        print "Download FW "
-        if os.path.exists("/home/pi/tmp") == True:
-            print subprocess.check_output('rm -rf /home/pi/tmp', shell=True) 
-            time.sleep(10)   
-        print subprocess.check_output('git clone https://github.com/izemkung/pihos /home/pi/tmp', shell=True)
-        time.sleep(10)
-        if os.path.exists("/home/pi/tmp") == True:
-            print subprocess.check_output('rm -rf /home/pi/pihos', shell=True)
-            time.sleep(10)
-            print subprocess.check_output('mv /home/pi/tmp /home/pi/pihos', shell=True)
-        #print subprocess.check_output('rm -rf /home/pi/tmp', shell=True)
-        print "FW Ready to use!!!"
-        #os.system('sudo reboot')
-        #break
-    time.sleep(300)
-    #continue
+    
     
 while per > 70 :
     OldVideo0 = min(glob.iglob('/home/pi/usb/vdo/ch0/*.[Aa][Vv][Ii]'), key=os.path.getctime)
@@ -95,12 +96,12 @@ while per > 70 :
     print 'Delete '+ OldVideo0 
     print 'Delete {0} file in /home/pi/usb/pic/ch0/ '.format(count)
 
-    count = 0;
-    for file in os.listdir("/home/pi/usb/pic/ch1/"):
-        if file.endswith(".jpg"):
-            if os.path.getctime("/home/pi/usb/pic/ch1/" + file) < os.path.getctime(OldVideo1) :
-                os.remove("/home/pi/usb/pic/ch1/" + file)
-                count = count +1
+    #count = 0;
+    #for file in os.listdir("/home/pi/usb/pic/ch1/"):
+        #if file.endswith(".jpg"):
+            #if os.path.getctime("/home/pi/usb/pic/ch1/" + file) < os.path.getctime(OldVideo1) :
+                #os.remove("/home/pi/usb/pic/ch1/" + file)
+                #count = count +1
                 
     os.remove(OldVideo1)
     print 'Delete '+ OldVideo1       
@@ -113,4 +114,5 @@ while per > 70 :
     print '/home/pi/usb  Size = {0:.2f} Avail = {1:.2f} Use% = {2:.2f}'.format(size,avail,per)
     
 print 'Memmory is OK!!!'
+time.sleep(300)
 #print 'Memmory is Error'
