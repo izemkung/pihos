@@ -56,26 +56,26 @@ count = len([name for name in os.listdir('/home/pi/usb/pic/ch0') if os.path.isfi
 numDel = 0 
 print 'NUM Pic ch0 {0} '.format(count)
 if count > 100: 
-    #while count > 50: 
-        #pic0 = min(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
-        #count -= 1
-        #numDel += 1
-        #print 'Delete' + pic0
-        #os.remove(pic0)
-    print subprocess.check_output('rm -r /home/pi/usb/pic/ch0/*', shell=True)    
+    while count > 50: 
+        pic0 = min(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
+        count -= 1
+        numDel += 1
+        print 'Delete' + pic0
+        os.remove(pic0)
+    #print subprocess.check_output('rm -r /home/pi/usb/pic/ch0/*', shell=True)    
     print 'Delete {0} file in pic/ch0/ '.format(numDel)
     
 count = len([name for name in os.listdir('/home/pi/usb/pic/ch1') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch1', name))])
 numDel = 0
 print 'NUM Pic ch1 {0} '.format(count)   
 if  count > 100:
-    #while count > 50:
-        #pic1 = min(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime) 
-        #count -= 1
-        #numDel += 1
-        #print 'Delete' + pic1
-        #os.remove(pic1)
-    print subprocess.check_output('rm -r /home/pi/usb/pic/ch1/*', shell=True)    
+    while count > 50:
+        pic1 = min(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime) 
+        count -= 1
+        numDel += 1
+        print 'Delete' + pic1
+        os.remove(pic1)
+    #print subprocess.check_output('rm -r /home/pi/usb/pic/ch1/*', shell=True)    
     print 'Delete {0} file in pic/ch1/ '.format(numDel)
     
 if per < 80 :
