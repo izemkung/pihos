@@ -55,7 +55,7 @@ print '/home/pi/usb  Size = {0:.2f} Avail = {1:.2f} Use% = {2:.2f}'.format(size,
 count = len([name for name in os.listdir('/home/pi/usb/pic/ch0') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch0', name))]) 
 numDel = 0 
 print 'NUM Pic ch0 {0} '.format(count)
-if count > 10: 
+if count > 100: 
     #while count > 50: 
         #pic0 = min(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
         #count -= 1
@@ -68,7 +68,7 @@ if count > 10:
 count = len([name for name in os.listdir('/home/pi/usb/pic/ch1') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch1', name))])
 numDel = 0
 print 'NUM Pic ch1 {0} '.format(count)   
-if  count > 10:
+if  count > 100:
     #while count > 50:
         #pic1 = min(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime) 
         #count -= 1
