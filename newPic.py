@@ -31,8 +31,8 @@ if os.path.exists("/home/pi/usb/config.ini") == False:
 
 
 
-os.system('sudo rm /home/pi/usb/pic/ch0/*.jpg')  
-os.system('sudo rm /home/pi/usb/pic/ch1/*.jpg')
+os.system('sudo rm -r /home/pi/usb/pic/ch0/*')  
+os.system('sudo rm -r /home/pi/usb/pic/ch1/*')
 time.sleep(5)
 Config = ConfigParser.ConfigParser()
 Config.read('/home/pi/usb/config.ini')
