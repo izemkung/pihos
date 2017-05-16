@@ -121,7 +121,7 @@ while(cap.isOpened()):
             cv2.putText(framePic,"car "+ str(id) + " id "+str(args["idcamera"])+" {}".format(strftime("%d%m%Y%H%M%S", gmtime())) ,(2,(h/picResolotion) - 5), font, 0.3,(0,255,255),1)    
             
             
-            cv2.imwrite(args["output"]+  'pic/ch' +str(args["idcamera"])  +'/img_{}.jpg'.format(strftime("%d/%m/%Y %H:%M", gmtime())), framePic)
+            cv2.imwrite(args["output"]+  'pic/ch' +str(args["idcamera"])  +'/img_{}.jpg'.format(strftime("%d%m%Y%H%M%S", gmtime())), framePic)
             endtime = current_time
             countPic+=1
             
