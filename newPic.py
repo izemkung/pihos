@@ -66,18 +66,19 @@ while True:
     if newpic1 != OldPic1 and newpic0 != OldPic0:
         GPIO.output(17,True)
         countNoNewpic = 0
-        
-        try:
+        OldPic0 = newpic0    
+        OldPic1 = newpic1
+        #try:
             #if OldPic1 != '':
                 #os.remove(OldPic1)
                 #print 'Delete '+ OldPic1
             #if OldPic0 != '':
                 #os.remove(OldPic0)
                 #print 'Delete '+ OldPic0
-            OldPic0 = newpic0    
-            OldPic1 = newpic1
-        except:
-            print 'Error no such file'
+            #OldPic0 = newpic0    
+            #OldPic1 = newpic1
+        #except:
+            #print 'Error no such file'
         #print 'Send ' +newpic0
         #print 'Send ' +newpic1
         
