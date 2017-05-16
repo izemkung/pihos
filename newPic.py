@@ -31,8 +31,8 @@ if os.path.exists("/home/pi/usb/config.ini") == False:
 
 
 
-#os.system('sudo rm -r /home/pi/usb/pic/ch0/*')  
-#os.system('sudo rm -r /home/pi/usb/pic/ch1/*')
+os.system('sudo rm /home/pi/usb/pic/ch0/*.jpg')  
+os.system('sudo rm /home/pi/usb/pic/ch1/*.jpg')
 time.sleep(5)
 Config = ConfigParser.ConfigParser()
 Config.read('/home/pi/usb/config.ini')
@@ -68,11 +68,11 @@ while True:
         countNoNewpic = 0
         
         try:
-            if OldPic1 != '':
-                os.remove(OldPic1)
+            #if OldPic1 != '':
+                #os.remove(OldPic1)
                 #print 'Delete '+ OldPic1
-            if OldPic0 != '':
-                os.remove(OldPic0)
+            #if OldPic0 != '':
+                #os.remove(OldPic0)
                 #print 'Delete '+ OldPic0
             OldPic0 = newpic0    
             OldPic1 = newpic1

@@ -33,7 +33,7 @@ if vergit != vercurrent :
     #print subprocess.check_output('rm -rf /home/pi/tmp', shell=True)
     print "FW Ready to use!!!"
     exit()
-    #os.system('sudo reboot')
+    os.system('sudo reboot')
     #break
 #continue
 
