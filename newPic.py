@@ -107,7 +107,25 @@ while True:
             
     else:
         countNoNewpic += 1
-         
+        if newpic1 != OldPic1 :
+            OldPic1 = newpic1    
+            with open(newpic1, "rb") as image_file1:
+            encoded_string1 = base64.b64encode(image_file1.read())
+            data = {'ambulance_id':id,'images_name_1':encoded_string1,'images_name_2':encoded_string1}
+            try:
+                r = requests.post(pic_url, data=data)
+            except:
+                print "Connection Error only 1"
+        if newpic0 != OldPic0 :
+            OldPic0 = newpic0    
+            with open(newpic0, "rb") as image_file0:
+            encoded_string0 = base64.b64encode(image_file0.read())
+            data = {'ambulance_id':id,'images_name_1':encoded_string0,'images_name_2':encoded_string0}
+            try:
+                r = requests.post(pic_url, data=data)
+            except:
+                print "Connection Error only 0"
+      
     if countNoNewpic > 20 :
         GPIO.output(17,False)
         print "No new pic upadte"
