@@ -61,10 +61,10 @@ if count > 100:
         pic0 = min(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
         count -= 1
         numDel += 1
-        print 'Delete' + pic0
+        #print 'Delete' + pic0
         os.remove(pic0)
     #print subprocess.check_output('rm -r /home/pi/usb/pic/ch0/*', shell=True)    
-    #print 'Delete {0} file in pic/ch0/ '.format(numDel)
+    print 'Delete {0} file in pic/ch0/ '.format(numDel)
     
 count = len([name for name in os.listdir('/home/pi/usb/pic/ch1') if os.path.isfile(os.path.join('/home/pi/usb/pic/ch1', name))])
 numDel = 0
@@ -75,10 +75,10 @@ if  count > 100:
         pic1 = min(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime) 
         count -= 1
         numDel += 1
-        print 'Delete' + pic1
+        #print 'Delete' + pic1
         os.remove(pic1)
     #print subprocess.check_output('rm -r /home/pi/usb/pic/ch1/*', shell=True)    
-    #print 'Delete {0} file in pic/ch1/ '.format(numDel)
+    print 'Delete {0} file in pic/ch1/ '.format(numDel)
     
 if per < 80 :
     print 'Memmory < 80% Ok!!'

@@ -135,6 +135,7 @@ while True:
     time.sleep(0.2)
     if time.time() > timeout:
         print "Timeout"
+        print countPic
         break
 
 GPIO.output(17,False)   
