@@ -85,7 +85,7 @@ if per < 80 :
     time.sleep(60)
     
     
-while per > 70 :
+while per > 30 :
     OldVideo0 = min(glob.iglob('/home/pi/usb/vdo/ch0/*.[Aa][Vv][Ii]'), key=os.path.getctime)
     OldVideo1 = min(glob.iglob('/home/pi/usb/vdo/ch1/*.[Aa][vv][Ii]'), key=os.path.getctime)
 
