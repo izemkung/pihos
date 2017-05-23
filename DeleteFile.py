@@ -98,39 +98,47 @@ if per < 80 :
     print 'Memmory < 80% Ok!!'
     time.sleep(60)
     
-    
-while per > 30 :
-    OldVideo0 = min(glob.iglob('/home/pi/usb/vdo/ch0/*.[Aa][Vv][Ii]'), key=os.path.getctime)
-    OldVideo1 = min(glob.iglob('/home/pi/usb/vdo/ch1/*.[Aa][vv][Ii]'), key=os.path.getctime)
+if per > 50 :    
+    while per > 30 :
+        OldVideo0 = min(glob.iglob('/home/pi/usb/vdo/ch0/*.[Aa][Vv][Ii]'), key=os.path.getctime)
+        OldVideo1 = min(glob.iglob('/home/pi/usb/vdo/ch1/*.[Aa][vv][Ii]'), key=os.path.getctime)
 
-    #count = 0
-    #for file in os.listdir("/home/pi/usb/pic/ch0/"):
-        #if file.endswith(".jpg"):
-            #if os.path.getctime("/home/pi/usb/pic/ch0/" + file) < os.path.getctime(OldVideo0) :
-                #os.remove("/home/pi/usb/pic/ch0/" + file)
-                #count = count +1
+        #count = 0
+        #for file in os.listdir("/home/pi/usb/pic/ch0/"):
+            #if file.endswith(".jpg"):
+                #if os.path.getctime("/home/pi/usb/pic/ch0/" + file) < os.path.getctime(OldVideo0) :
+                    #os.remove("/home/pi/usb/pic/ch0/" + file)
+                    #count = count +1
+        try:
+            os.remove(OldVideo0)
+        except:
+            print 'Delete VDO 0 re mount'
+            os.system('sudo mount /dev/sda1 -o remount,rw')           
+        
+        print 'Delete '+ OldVideo0 
+        print 'Delete {0} file in /home/pi/usb/pic/ch0/ '.format(count)
 
-    os.remove(OldVideo0)
-    print 'Delete '+ OldVideo0 
-    print 'Delete {0} file in /home/pi/usb/pic/ch0/ '.format(count)
+        #count = 0;
+        #for file in os.listdir("/home/pi/usb/pic/ch1/"):
+            #if file.endswith(".jpg"):
+                #if os.path.getctime("/home/pi/usb/pic/ch1/" + file) < os.path.getctime(OldVideo1) :
+                    #os.remove("/home/pi/usb/pic/ch1/" + file)
+                    #count = count +1
+                    
+        try:
+            os.remove(OldVideo1)
+        except:
+            print 'Delete VDO 1 re mount'
+            os.system('sudo mount /dev/sda1 -o remount,rw') 
+        print 'Delete '+ OldVideo1       
+        print 'Delete {0} file in /home/pi/usb/pic/ch1/ '.format(count)
 
-    #count = 0;
-    #for file in os.listdir("/home/pi/usb/pic/ch1/"):
-        #if file.endswith(".jpg"):
-            #if os.path.getctime("/home/pi/usb/pic/ch1/" + file) < os.path.getctime(OldVideo1) :
-                #os.remove("/home/pi/usb/pic/ch1/" + file)
-                #count = count +1
-                
-    os.remove(OldVideo1)
-    print 'Delete '+ OldVideo1       
-    print 'Delete {0} file in /home/pi/usb/pic/ch1/ '.format(count)
-
-    statvfs = os.statvfs('/home/pi/usb')
-    size = (statvfs.f_frsize * statvfs.f_blocks) / 1073741824.00
-    avail = (statvfs.f_frsize * statvfs.f_bavail) / 1073741824.00 
-    per = (( size - avail ) / size ) * 100
-    print '/home/pi/usb  Size = {0:.2f} Avail = {1:.2f} Use% = {2:.2f}'.format(size,avail,per)
-    
+        statvfs = os.statvfs('/home/pi/usb')
+        size = (statvfs.f_frsize * statvfs.f_blocks) / 1073741824.00
+        avail = (statvfs.f_frsize * statvfs.f_bavail) / 1073741824.00 
+        per = (( size - avail ) / size ) * 100
+        print '/home/pi/usb  Size = {0:.2f} Avail = {1:.2f} Use% = {2:.2f}'.format(size,avail,per)
+        
 print 'Memmory is OK!!!'
 time.sleep(300)
 #print 'Memmory is Error'
