@@ -62,7 +62,15 @@ if count > 100:
         count -= 1
         numDel += 1
         #print 'Delete' + pic0
-        os.remove(pic0)
+        try:
+            os.remove(pic0)
+        except:
+            print 'Delete error re mount 0'
+            os.system('sudo mount /dev/sda1 -o remount,rw')
+            os.system('sudo rm -r /home/pi/usb/pic/ch0')
+            os.system('sudo mkdir /home/pi/usb/pic/ch0')
+
+
     #print subprocess.check_output('rm -r /home/pi/usb/pic/ch0/*', shell=True)    
     print 'Delete {0} file in pic/ch0/ '.format(numDel)
     
@@ -76,7 +84,13 @@ if  count > 100:
         count -= 1
         numDel += 1
         #print 'Delete' + pic1
-        os.remove(pic1)
+        try:
+            os.remove(pic1)
+        except:
+            print 'Delete error re mount 1'
+            os.system('sudo mount /dev/sda1 -o remount,rw')
+            os.system('sudo rm -r /home/pi/usb/pic/ch1')
+            os.system('sudo mkdir /home/pi/usb/pic/ch1')
     #print subprocess.check_output('rm -r /home/pi/usb/pic/ch1/*', shell=True)    
     print 'Delete {0} file in pic/ch1/ '.format(numDel)
     
