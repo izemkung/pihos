@@ -36,7 +36,6 @@ try:
 except:
     os.system('sudo mount /dev/sda1 -o remount,rw')
 
-os.system('sudo mount /home/pi/usb/ -o remount,rw')
 
 #time.sleep(5)
 Config = ConfigParser.ConfigParser()
