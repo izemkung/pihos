@@ -70,7 +70,8 @@ while True:
     if newpic1 != OldPic1 and newpic0 != OldPic0:
         GPIO.output(17,True)
         countNoNewpic = 0
-        
+        OldPic0 = newpic0    
+        OldPic1 = newpic1
         #try:
             #if OldPic1 != '':
                 #os.remove(OldPic1)
@@ -99,8 +100,7 @@ while True:
             GPIO.output(27,True)
             GPIO.output(17,False)
             countPic += 1
-            OldPic0 = newpic0    
-            OldPic1 = newpic1
+            
             connectionError = 0
         except:
             GPIO.output(27,False)
