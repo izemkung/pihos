@@ -26,7 +26,7 @@ def ConfigSectionMap(section):
 
 if os.path.exists("/home/pi/usb/config.ini") == False:
     print("config.ini error")
-    os.system('sudo mount /dev/sda1 /home/pi/usb/')
+    os.system('sudo mount /dev/sda1 ')
     exit()
 
 
@@ -35,6 +35,9 @@ try:
     os.system('sudo rm /home/pi/usb/pic/ch1/*.jpg')
 except:
     os.system('sudo mount /dev/sda1 -o remount,rw')
+
+os.system('sudo mount /home/pi/usb/ -o remount,rw')
+
 #time.sleep(5)
 Config = ConfigParser.ConfigParser()
 Config.read('/home/pi/usb/config.ini')
