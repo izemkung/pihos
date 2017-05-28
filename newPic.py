@@ -65,11 +65,11 @@ while True:
     
     timeout = time.time() + 5
     
-    try:
-        newpic1 = max(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime)
-        newpic0 = max(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
-    except:
-        time.sleep(5)
+    #try:
+    newpic1 = max(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime)
+    newpic0 = max(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
+    #except:
+        #time.sleep(5)
 
     if newpic1 != OldPic1 and newpic0 != OldPic0:
         GPIO.output(17,True)
