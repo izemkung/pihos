@@ -29,15 +29,17 @@ if os.path.exists("/home/pi/usb/config.ini") == False:
     os.system('sudo mount /dev/sda1 ')
     exit()
 
-
 try:
-    os.system('sudo rm /home/pi/usb/pic/ch0/*.jpg')  
+    os.system('sudo mount -o rw,remount /dev/sda1')
+    os.system('sudo rm /home/pi/usb/pic/ch0/*.jpg') 
+    os.system('sudo mount -o rw,remount /dev/sda1') 
     os.system('sudo rm /home/pi/usb/pic/ch1/*.jpg')
 except:
-    os.system('sudo mount /dev/sda1 -o remount,rw')
+    time.sleep(2)
+    
 
 
-#time.sleep(5)
+time.sleep(2)
 Config = ConfigParser.ConfigParser()
 Config.read('/home/pi/usb/config.ini')
 
@@ -62,11 +64,13 @@ GPIO.setup(27, GPIO.OUT)#3G
 while True:
     
     timeout = time.time() + 5
+    
+    try:
+        newpic1 = max(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime)
+        newpic0 = max(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
+    except:
+        time.sleep(5)
 
-    newpic1 = max(glob.iglob('/home/pi/usb/pic/ch1/*.[Jj][Pp][Gg]'), key=os.path.getctime)
-    
-    newpic0 = max(glob.iglob('/home/pi/usb/pic/ch0/*.[Jj][Pp][Gg]'), key=os.path.getctime)
-    
     if newpic1 != OldPic1 and newpic0 != OldPic0:
         GPIO.output(17,True)
         countNoNewpic = 0
