@@ -34,8 +34,11 @@ os.system('sudo mount -o rw,remount /dev/sda1')
 os.system('sudo rm /home/pi/usb/pic/ch0/*.jpg') 
 os.system('sudo mount -o rw,remount /dev/sda1') 
 os.system('sudo rm /home/pi/usb/pic/ch1/*.jpg')
-os.system('sudo mount /dev/sda1 ')
 
+try:
+    os.system('sudo mount /dev/sda1 ')
+except:
+    print('Error mount')
 time.sleep(2)
 Config = ConfigParser.ConfigParser()
 Config.read('/home/pi/usb/config.ini')
