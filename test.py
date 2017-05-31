@@ -14,7 +14,9 @@ import subprocess
 #===================================================Update FW Version================================
 vercurrent = subprocess.check_output('sudo rm /home/pi/usb/pic/ch0/*.jpg', shell=True)
 print vercurrent
+print '0 >'+ vercurrent.split(':')[0]
+print '1 >'+ vercurrent.split(':')[1]
+print '2 >'+ vercurrent.split(':')[2]
 if vercurrent == '' :
     print 'isOK' + vercurrent
-if vercurrent == 'No such file or directory' :
-    print ' No such 5555555'
+
