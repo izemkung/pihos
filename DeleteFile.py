@@ -19,17 +19,17 @@ vergit =  subprocess.check_output('git ls-remote https://github.com/izemkung/pih
 print 'Git ver '+ vergit
 if vergit == vercurrent :
     print "version FW Ok!!!"   
-if vergit != vercurrent :
+if vergit != vercurrent and len(vercurrent) == len(vergit):
     print "Download FW "
     if os.path.exists("/home/pi/tmp") == True:
-        print subprocess.check_output('rm -rf /home/pi/tmp', shell=True) 
+        print subprocess.check_output('sudo rm -rf /home/pi/tmp', shell=True) 
         time.sleep(10)   
-    print subprocess.check_output('git clone https://github.com/izemkung/pihos /home/pi/tmp', shell=True)
+    print subprocess.check_output('sudo git clone https://github.com/izemkung/pihos /home/pi/tmp', shell=True)
     time.sleep(10)
     if os.path.exists("/home/pi/tmp") == True:
-        print subprocess.check_output('rm -rf /home/pi/pihos', shell=True)
-        time.sleep(10)
-        print subprocess.check_output('mv /home/pi/tmp /home/pi/pihos', shell=True)
+        print subprocess.check_output('sudo rm -rf /home/pi/pihos', shell=True)
+        #time.sleep(10)
+        print subprocess.check_output('sudo mv /home/pi/tmp /home/pi/pihos', shell=True)
     #print subprocess.check_output('rm -rf /home/pi/tmp', shell=True)
     print "FW Ready to use!!!"
     exit()
