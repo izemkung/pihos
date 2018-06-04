@@ -1,22 +1,28 @@
-import os
-import glob
-import cv2
-import cv
-import datetime
-import base64
-import requests
-import urllib2
-import httplib
+import serial
 import time
-import sys
-import subprocess
 
-#===================================================Update FW Version================================
-vercurrent = subprocess.check_output('sudo rm /home/pi/usb/pic/ch0/*.jpg', shell=True)
-print vercurrent
-print '0 >'+ vercurrent.split(':')[0]
-print '1 >'+ vercurrent.split(':')[1]
-print '2 >'+ vercurrent.split(':')[2]
-if vercurrent == '' :
-    print 'isOK' + vercurrent
-
+while True:
+    time.sleep(5)
+    
+port = 'Error'
+for num in range(0, 4):
+    port = '/dev/ttyUSB{0}'.format(num)
+    try:
+        ser = serial.Serial(port, 115200, timeout=.5)
+        input = ser.inWaiting()
+        print('Checking {0} Data In {1}'.format(port,input))
+        time.sleep(5)
+        input = ser.inWaiting()
+    except:
+        print('Port {0} busy'.format(port))
+    try:
+        for count in range(0, 10):
+            print(ser.readline())
+    except:
+        print('Port {0} Except'.format(port))
+    print('Checked {0} Data In {1}'.format(port,input))
+    if(input > 500):
+        print('{0} Ok!!!'.format(port))
+        break
+print('ERROR')
+    
