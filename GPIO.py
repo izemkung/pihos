@@ -223,14 +223,14 @@ while True:
 #I/O Power on
     if sendStart == False  :
         if internet_on() == True :  
-            if(SendStatusFun('Power Start') == True):
+            if(SendStatusFun('2.5 Power Start') == True):
                 sendStart = True
                 print sendStart
 
 #I/O Power off
     if(GPIO.input(4) == 0):
         print('Power Off')
-        SendStatusFun('Power Off {0:.1f} Min'.format((current_time - timeStart)/60))
+        SendStatusFun('2.5 Power Off {0:.1f} Min'.format((current_time - timeStart)/60))
         time.sleep(10)
         
         os.system('sudo shutdown -h now')
@@ -238,7 +238,7 @@ while True:
 
 #On line status
     if current_time - startTime > 60*10:
-        SendStatusFun('On {0:.1f} Min'.format((current_time - timeStart)/60))
+        SendStatusFun('2.5 On {0:.1f} Min'.format((current_time - timeStart)/60))
         startTime = current_time
 
 #Ennable GPS
