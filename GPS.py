@@ -63,7 +63,7 @@ class GpsPoller(threading.Thread):
 
 print  'URL > ',gps_url,' ID > ',id
 gpsp = GpsPoller() # create the thread
-gpsd = gps(mode=WATCH_ENABLE)
+#gpsd = gps(mode=WATCH_ENABLE)
 #try:
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -74,7 +74,7 @@ gpsp.start() # start it up
 countSend = 0
 countError = 0
 timeout = time.time() + 30
-timeReset = time.time() + 300
+timeReset = time.time() + 1200
 while True:
   #gpsd.next()
   #It may take a second or two to get good data
@@ -97,7 +97,7 @@ while True:
     GPIO.output(22,True)
     try:
       resp = requests.get(gps_url+'?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}&tracking_heading={4}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed,gpsd.fix.track), timeout=2.001)
-      if(resp.status_code != 200)
+      if(resp.status_code != 200):
         print 'status_code ' , resp.status_code
       #print 'headers     ' , resp.headers
       #print 'content     ' , resp.content
@@ -180,4 +180,4 @@ gpsp.join() # wait for the thread to finish what it's doing
 GPIO.output(27,False)
 GPIO.output(22,False)
 GPIO.cleanup()
-#exit()
+exit()
