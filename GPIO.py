@@ -86,7 +86,7 @@ def SendStatusFun(message):
         if len(SID[1]) <= 13:
             return False
 
-        resp = requests.get('http://188.166.197.107:8001?id={0}&ip={1}&sid={2}&imei={3}&api={4}&msg={5}'.format(id,ip,SID[1],IMEI[0],api[2],message), timeout=3.001)
+        resp = requests.get('http://188.166.197.107:8001?id={0}&ip={1}&sid={2}&imei={3}&api={4}_25&msg={5}'.format(id,ip,SID[1],IMEI[0],api[2],message), timeout=3.001)
         print ('content     ' + resp.content) 
         return True
     except:
@@ -223,14 +223,14 @@ while True:
 #I/O Power on
     if sendStart == False  :
         if internet_on() == True :  
-            if(SendStatusFun('2.5 Power Start') == True):
+            if(SendStatusFun('Power Start') == True):
                 sendStart = True
                 print sendStart
 
 #I/O Power off
     if(GPIO.input(4) == 0):
         print('Power Off')
-        SendStatusFun('2.5 Power Off {0:.1f} Min'.format((current_time - timeStart)/60))
+        SendStatusFun('Power Off {0:.1f} Min'.format((current_time - timeStart)/60))
         time.sleep(10)
         
         os.system('sudo shutdown -h now')
@@ -238,7 +238,7 @@ while True:
 
 #On line status
     if current_time - startTime > 60*10:
-        SendStatusFun('2.5 On {0:.1f} Min'.format((current_time - timeStart)/60))
+        SendStatusFun('On {0:.1f} Min'.format((current_time - timeStart)/60))
         startTime = current_time
 
 #Ennable GPS
