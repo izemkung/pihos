@@ -96,10 +96,7 @@ if  count > 100:
     #print subprocess.check_output('rm -r /home/pi/usb/pic/ch1/*', shell=True)    
     print 'Delete {0} file in pic/ch1/ '.format(numDel)
     
-if per < 80 :
-    print 'Memmory < 80% Ok!!'
-    time.sleep(60)
-    
+   
 if per > 50 :    
     while per > 30 :
         OldVideo0 = min(glob.iglob('/home/pi/usb/vdo/ch0/*.[Aa][Vv][Ii]'), key=os.path.getctime)
@@ -140,7 +137,10 @@ if per > 50 :
         avail = (statvfs.f_frsize * statvfs.f_bavail) / 1073741824.00 
         per = (( size - avail ) / size ) * 100
         print '/home/pi/usb  Size = {0:.2f} Avail = {1:.2f} Use% = {2:.2f}'.format(size,avail,per)
-        
+    print 'Delete Ok!!'
+if per < 80 :
+    print 'Memmory < 80% Ok!!'
+
 print 'Memmory is OK!!!'
 time.sleep(300)
 #print 'Memmory is Error'
