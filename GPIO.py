@@ -86,7 +86,7 @@ def SendStatusFun(message):
         if len(SID[1]) <= 13:
             return False
 
-        resp = requests.get('http://188.166.197.107:8001?id={0}&ip={1}&sid={2}&imei={3}&api={4}_25&msg={5}'.format(id,ip,SID[1],IMEI[0],api[2],message), timeout=3.001)
+        resp = requests.get('http://188.166.197.107:8001?id={0}&ip={1}&sid={2}&imei={3}&api={4}_35_25&msg={5}'.format(id,ip,SID[1],IMEI[0],api[2],message), timeout=3.001)
         print ('content     ' + resp.content) 
         return True
     except:

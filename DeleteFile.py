@@ -23,19 +23,16 @@ if vergit != vercurrent and len(vercurrent) == len(vergit):
     print "Download FW "
     if os.path.exists("/home/pi/tmp") == True:
         print subprocess.check_output('sudo rm -rf /home/pi/tmp', shell=True) 
-        time.sleep(10)   
+        time.sleep(5)   
     print subprocess.check_output('sudo git clone https://github.com/izemkung/pihos /home/pi/tmp', shell=True)
     time.sleep(10)
     if os.path.exists("/home/pi/tmp") == True:
         print subprocess.check_output('sudo rm -rf /home/pi/pihos', shell=True)
         #time.sleep(10)
         print subprocess.check_output('sudo mv /home/pi/tmp /home/pi/pihos', shell=True)
-        print subprocess.check_output('sudo chmod +x /home/pi/pihos/connect.sh', shell=True)
     #print subprocess.check_output('rm -rf /home/pi/tmp', shell=True)
     print "FW Ready to use!!!"
     os.system('sudo reboot')
-    exit()
-   
     #break
 #continue
 
@@ -96,9 +93,33 @@ if  count > 100:
     #print subprocess.check_output('rm -r /home/pi/usb/pic/ch1/*', shell=True)    
     print 'Delete {0} file in pic/ch1/ '.format(numDel)
     
-   
-if per > 50 :    
-    while per > 30 :
+if per < 80 :
+    print 'Memmory < 80% Ok!!'
+
+    vdoFileError = True
+    while(vdoFileError):
+        vdoFileError = False
+        OldVideo0 = min(glob.iglob('/home/pi/usb/vdo/ch0/*.[Aa][Vv][Ii]'), key=os.path.getsize)
+        OldVideo1 = min(glob.iglob('/home/pi/usb/vdo/ch1/*.[Aa][vv][Ii]'), key=os.path.getsize) 
+        
+        #print("Size (In bytes) of '%s':" %OldVideo1, os.path.getsize(OldVideo0) ) 
+        #print("Size (In bytes) of '%s':" %OldVideo0, os.path.getsize(OldVideo1) ) 
+
+        if(os.path.getsize(OldVideo0) < 50000):
+            os.remove(OldVideo0)
+            print("Remove : '%s'" %OldVideo0) 
+            vdoFileError = True
+
+        if(os.path.getsize(OldVideo1) < 50000):
+            os.remove(OldVideo1)
+            print("Remove : '%s'" %OldVideo1) 
+            vdoFileError = True
+        time.sleep(1)
+
+    time.sleep(60)
+    
+if per > 80 :    
+    while per > 50 :
         OldVideo0 = min(glob.iglob('/home/pi/usb/vdo/ch0/*.[Aa][Vv][Ii]'), key=os.path.getctime)
         OldVideo1 = min(glob.iglob('/home/pi/usb/vdo/ch1/*.[Aa][vv][Ii]'), key=os.path.getctime)
 
@@ -137,10 +158,7 @@ if per > 50 :
         avail = (statvfs.f_frsize * statvfs.f_bavail) / 1073741824.00 
         per = (( size - avail ) / size ) * 100
         print '/home/pi/usb  Size = {0:.2f} Avail = {1:.2f} Use% = {2:.2f}'.format(size,avail,per)
-    print 'Delete Ok!!'
-if per < 80 :
-    print 'Memmory < 80% Ok!!'
-
+        
 print 'Memmory is OK!!!'
 time.sleep(300)
 #print 'Memmory is Error'
